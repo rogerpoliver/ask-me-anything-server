@@ -1,0 +1,33 @@
+services:
+  db:
+    image: bitnami/postgresql:latest
+    container_name: ask-me-anything-database
+    restart: unless-stopped
+    ports:
+      - ${POSTGRESQL_DATABASE_PORT:-5432}:5432
+    environment:
+      POSTGRESQL_USERNAME: ${POSTGRESQL_DATABASE_USERNAME}
+      POSTGRESQL_PASSWORD: ${POSTGRESQL_DATABASE_PASSWORD}
+      POSTGRESQL_DATABASE: ${POSTGRESQL_DATABASE_NAME}
+    volumes:
+      - db:/var/lib/postgresql/data
+      
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports: 
+      - ${PGADMIN_PORT:-8081}:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+
+
+volumes:
+  db:
+    driver: local
+  pgadmin:
+    driver: local
