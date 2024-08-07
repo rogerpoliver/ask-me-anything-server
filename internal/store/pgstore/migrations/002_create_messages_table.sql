@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS messages (
     "reaction_count" BIGINT NOT NULL DEFAULT 0,
     "answered" BOOLEAN NOT NULL DEFAULT false,
     FOREIGN KEY (room_id) REFERENCES rooms(id)
-)
- ---- create above / drop below ----
+) 
+---- create above / drop below ----
 DROP TABLE IF EXISTS messages;
 
 -- Write your migrate down statements here. If this migration is irreversible
