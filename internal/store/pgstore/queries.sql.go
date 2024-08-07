@@ -3,7 +3,7 @@
 //   sqlc v1.27.0
 // source: queries.sql
 
-package pqstore
+package pgstore
 
 import (
 	"context"
